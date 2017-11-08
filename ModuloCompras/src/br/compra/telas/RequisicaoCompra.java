@@ -25,7 +25,7 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
 
     private Principal principal;
     private AddProdutoRequisicao Addprod;
-    private DefaultTableModel model;
+    private final DefaultTableModel model;
     private int codigo;
 
     public RequisicaoCompra() {
@@ -34,6 +34,7 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
         bnt_excluir.addActionListener(new RequisicaoListener(this));
         bnt_inserir.addActionListener(new RequisicaoListener(this));
         bnt_limpar.addActionListener(new RequisicaoListener(this));
+        model = (DefaultTableModel) tabela_produto.getModel();
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/cart_add.png"));
 
         DataAtual();
@@ -107,8 +108,6 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
 
     public void setlis(List<ProdutoGetSet> lis) {
 
-        model = (DefaultTableModel) tabela_produto.getModel();
-
         for (int i = 0; i < lis.size(); i++) {
             model.addRow(new Object[]{lis.get(i).getCodigo(), lis.get(i).getNome(), lis.get(i).getquant()});
         }
@@ -120,15 +119,17 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
         txt_solicitante.setText(null);
         txt_observacao.setText(null);
         comboBox_prioridade.setSelectedIndex(0);
-        model.setRowCount(0);
+        if (model.getRowCount() != 0) {
+            model.setRowCount(0);
+        }
     }
 
     public boolean Verifica() {
-        return !(txt_chefe.getText().trim().isEmpty()
-                || txt_setor.getText().trim().isEmpty()
-                || txt_solicitante.getText().trim().isEmpty()
-                || txt_data.getText().replaceAll("[/]", "").trim().isEmpty()
-                || txt_solicitante.getText().trim().isEmpty());
+         
+        return !(model.getRowCount() == 0
+               || txt_chefe.getText().trim().isEmpty()
+               || txt_setor.getText().trim().isEmpty()
+               || txt_solicitante.getText().trim().isEmpty());
     }
 
     @SuppressWarnings("unchecked")
@@ -395,7 +396,7 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_dataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_dataFocusLost
-    Date data = null;
+        Date data = null;
         String dataTexto = txt_data.getText();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -420,7 +421,7 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
         }
 
         txt_data.setEditable(false);
- 
+
     }//GEN-LAST:event_txt_dataFocusLost
 
     private void label_newdataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_newdataMouseClicked

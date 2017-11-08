@@ -1,20 +1,28 @@
-
 package br.compra.getset;
 
 import java.util.List;
 
-
 public class NotaGetSet {
-    
+
     private Integer idVeiculo;
-    private String modelo,marca,placa;
-    private Integer idTransportador,numeracao,peso_bruto,peso_liquido,codigo_antt;
-    private Double frete,valorSeguro;
-    private String nome,especie;
-    private Integer idNotaFiscal,numero,baseDeCalculoDo_ICMS,baseDeCalculoDo_ICMS_ST;
-    private Double valorDo_ICMS,valorDo_ICMS_substituicao;
+    private String modelo, marca, placa;
+    private Integer idTransportador, numeracao, peso_bruto, peso_liquido, codigo_antt;
+    private Double frete, valorSeguro;
+    private String nome, especie;
+    private Integer idNotaFiscal, numero, baseDeCalculoDo_ICMS, baseDeCalculoDo_ICMS_ST;
+    private String data_emissao;
+
+    private Double valorDo_ICMS, valorDo_ICMS_substituicao;
     private Integer idEndereco;
     private List<NotaItemGetSet> lisNotaItem;
+
+    public String getData_emissao() {
+        return data_emissao;
+    }
+
+    public void setData_emissao(String data_emissao) {
+        this.data_emissao = data_emissao;
+    }
 
     public Integer getIdVeiculo() {
         return idVeiculo;
@@ -183,6 +191,5 @@ public class NotaGetSet {
     public void setLisNotaItem(List<NotaItemGetSet> lisNotaItem) {
         this.lisNotaItem = lisNotaItem;
     }
-    
-    
+
 }

@@ -78,25 +78,6 @@ public class RequisicaoDao {
 
     }
 
-    public boolean isRegistro(RequisicaoGetSet req) throws SQLException {
-
-        ResultSet rs = null;
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-            conn = Conexao.getConnection();
-            String sql = "SELECT idreqcompras FROM reqcompras WHERE idreqcompras = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, req.getNumRequisicao());
-            rs = ps.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            Logger.getLogger(RequisicaoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
     public static int ReadUltimo() throws SQLException {
 
         ResultSet rs = null;

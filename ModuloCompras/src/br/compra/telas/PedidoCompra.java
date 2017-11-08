@@ -131,14 +131,13 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
 
         return pedido;
     }
-    
-    
-    public void Limpar(){
+
+    public void Limpar() {
         model.setNumRows(0);
     }
-    
-     public boolean Verifica() {
-        return (model.getRowCount()>0);
+
+    public boolean Verifica() {
+        return (model.getRowCount() > 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -179,14 +178,24 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabela_produto.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tabela_produto);
+        if (tabela_produto.getColumnModel().getColumnCount() > 0) {
+            tabela_produto.getColumnModel().getColumn(0).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(1).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(2).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(3).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(4).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(5).setResizable(false);
+            tabela_produto.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         bnt_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/compra/icones/pencil.png"))); // NOI18N
         bnt_editar.setText("Editar");
@@ -330,7 +339,7 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_label_newdataKeyPressed
 
     private void txt_dataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_dataFocusLost
-    Date data = null;
+        Date data = null;
         String dataTexto = txt_data.getText();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 

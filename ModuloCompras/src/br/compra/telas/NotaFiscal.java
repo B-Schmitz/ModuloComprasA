@@ -1,37 +1,55 @@
-
 package br.compra.telas;
 
+import br.compra.dao.NotaDao;
+import br.compra.getset.NotaGetSet;
+import java.util.List;
 import javax.swing.ImageIcon;
-
+import javax.swing.table.DefaultTableModel;
 
 public class NotaFiscal extends javax.swing.JInternalFrame {
-    
 
-
+    private NotaGetSet nota;
+    private final NotaDao notaDao = new NotaDao();
 
     public NotaFiscal() {
         initComponents();
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/receipt_invoice.png"));
+        AtualizaLista();
     }
 
-    
+    public final void AtualizaLista() {
+
+        List<NotaGetSet> notas = notaDao.Read();
+
+        DefaultTableModel model_nota = (DefaultTableModel) tabela_notasfiscais.getModel();
+        model_nota.setNumRows(0);
+
+        for (int i = 0; i < notas.size(); i++) {
+
+            model_nota.addRow(new Object[]{notas.get(i).getIdNotaFiscal(), notas.get(i).getNumeracao(), notas.get(i).getData_emissao(), 3});
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabela_notasfiscais = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela_itens = new javax.swing.JTable();
         bnt_cadastrar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tabela_impostos = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabela_transportador = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tabela_endereco = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Nota Fiscal");
@@ -39,7 +57,7 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nota Fiscal"));
         jPanel2.setToolTipText("");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_notasfiscais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -55,12 +73,17 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
+        tabela_notasfiscais.getTableHeader().setReorderingAllowed(false);
+        tabela_notasfiscais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabela_notasfiscaisMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tabela_notasfiscais);
+        if (tabela_notasfiscais.getColumnModel().getColumnCount() > 0) {
+            tabela_notasfiscais.getColumnModel().getColumn(0).setResizable(false);
+            tabela_notasfiscais.getColumnModel().getColumn(1).setResizable(false);
+            tabela_notasfiscais.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -69,8 +92,8 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +105,7 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Itens"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_itens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -98,14 +121,14 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Preço");
+        tabela_itens.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tabela_itens);
+        if (tabela_itens.getColumnModel().getColumnCount() > 0) {
+            tabela_itens.getColumnModel().getColumn(0).setResizable(false);
+            tabela_itens.getColumnModel().getColumn(1).setResizable(false);
+            tabela_itens.getColumnModel().getColumn(2).setResizable(false);
+            tabela_itens.getColumnModel().getColumn(3).setResizable(false);
+            tabela_itens.getColumnModel().getColumn(3).setHeaderValue("Preço");
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -114,15 +137,15 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
         );
 
         bnt_cadastrar.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
@@ -131,7 +154,7 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Impostos"));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_impostos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -147,13 +170,13 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(2).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
+        tabela_impostos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tabela_impostos);
+        if (tabela_impostos.getColumnModel().getColumnCount() > 0) {
+            tabela_impostos.getColumnModel().getColumn(0).setResizable(false);
+            tabela_impostos.getColumnModel().getColumn(1).setResizable(false);
+            tabela_impostos.getColumnModel().getColumn(2).setResizable(false);
+            tabela_impostos.getColumnModel().getColumn(3).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -162,20 +185,19 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Transportador"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_transportador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -191,14 +213,19 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable4.getTableHeader().setReorderingAllowed(false);
-        jScrollPane5.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(0).setResizable(false);
-            jTable4.getColumnModel().getColumn(1).setResizable(false);
-            jTable4.getColumnModel().getColumn(2).setResizable(false);
-            jTable4.getColumnModel().getColumn(3).setResizable(false);
-            jTable4.getColumnModel().getColumn(3).setHeaderValue("Preço");
+        tabela_transportador.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(tabela_transportador);
+        if (tabela_transportador.getColumnModel().getColumnCount() > 0) {
+            tabela_transportador.getColumnModel().getColumn(0).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(1).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(2).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(3).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(4).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(5).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(6).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(6).setHeaderValue("Código Antt");
+            tabela_transportador.getColumnModel().getColumn(7).setResizable(false);
+            tabela_transportador.getColumnModel().getColumn(7).setHeaderValue("Valor Seguro");
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -207,15 +234,59 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+
+        tabela_endereco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "País", "Estado", "Cidade", "Bairro", "Rua", "CEP"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabela_endereco.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(tabela_endereco);
+        if (tabela_endereco.getColumnModel().getColumnCount() > 0) {
+            tabela_endereco.getColumnModel().getColumn(0).setResizable(false);
+            tabela_endereco.getColumnModel().getColumn(1).setResizable(false);
+            tabela_endereco.getColumnModel().getColumn(2).setResizable(false);
+            tabela_endereco.getColumnModel().getColumn(3).setResizable(false);
+            tabela_endereco.getColumnModel().getColumn(4).setResizable(false);
+            tabela_endereco.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,14 +297,19 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(202, 202, 202))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,21 +318,39 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tabela_notasfiscaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_notasfiscaisMouseClicked
+        if (evt.getClickCount() == 2) {
+            /*
+  DefaultTableModel model_imposto = (DefaultTableModel) tabela_notasfiscais.getModel();
+        model_imposto.setNumRows(0);
+
+        for (int i = 0; i < notas.size(); i++) {
+
+            model_imposto.addRow(new Object[]{notas.get(i).getBaseDeCalculoDo_ICMS(), notas.get(i).getBaseDeCalculoDo_ICMS_ST(), notas.get(i).getValorDo_ICMS(), notas.get(i).getValorDo_ICMS_substituicao()});
+
+        }
+             */
+        }
+    }//GEN-LAST:event_tabela_notasfiscaisMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_cadastrar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -265,9 +359,11 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable tabela_endereco;
+    private javax.swing.JTable tabela_impostos;
+    private javax.swing.JTable tabela_itens;
+    private javax.swing.JTable tabela_notasfiscais;
+    private javax.swing.JTable tabela_transportador;
     // End of variables declaration//GEN-END:variables
 }

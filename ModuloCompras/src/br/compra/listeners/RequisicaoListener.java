@@ -30,15 +30,11 @@ public class RequisicaoListener implements ActionListener {
             if (requisicao.Verifica()) {
                 req = requisicao.getRequisicao();
                 try {
-                    if (!reqDao.isRegistro(req)) {
                         req = requisicao.getRequisicao();
                         reqDao.Insert(req);
                         requisicao.Limpar();
                         JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso", "Cadastro concluído", JOptionPane.PLAIN_MESSAGE, new ImageIcon("src/br/compra/icones/add.png"));
                         requisicao.AtualizaCodigo();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "ID de requisição já cadastrado", "Cadastro falhou", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/br/compra/icones/exclamation.png"));
-                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(RequisicaoListener.class.getName()).log(Level.SEVERE, null, ex);
                 }

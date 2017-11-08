@@ -5,6 +5,7 @@ import br.compra.getset.PedidoGetSet;
 import br.compra.listeners.ConsultarPedidosListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class VisualizarPedidos extends javax.swing.JInternalFrame {
@@ -19,6 +20,7 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
         initComponents();
 
         btn_baixa.addActionListener(new ConsultarPedidosListener(this));
+        this.setFrameIcon(new ImageIcon("src/br/compra/icones/search_field.png"));
     }
 
     public PedidoGetSet Baixa() {

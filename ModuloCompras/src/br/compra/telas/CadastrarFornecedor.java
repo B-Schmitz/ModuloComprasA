@@ -418,20 +418,19 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_nomeFocusGained
 
     private void combo_categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_categoriaMouseClicked
-      
         atualizaCombo();
     }//GEN-LAST:event_combo_categoriaMouseClicked
 
-    public void atualizaCombo(){
-    CategoriaDao catDao = new CategoriaDao();
+    public void atualizaCombo() {
+        CategoriaDao catDao = new CategoriaDao();
         List<CategoriaGetSet> lis = new ArrayList<>();
 
         lis = catDao.read(lis);
         setComboBox(lis);
-}
-    
+    }
+
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-       Limpar();
+        Limpar();
     }//GEN-LAST:event_formInternalFrameClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
