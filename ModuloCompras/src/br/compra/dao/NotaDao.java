@@ -36,14 +36,19 @@ public class NotaDao {
                 nota.setIdNotaFiscal(rs.getInt("n.idNotaFiscal"));
                 nota.setNumeracao(rs.getInt("n.numero"));
                 nota.setData_emissao(rs.getDate("n.data_emissao") + "");
-               // nota.setBaseDeCalculoDo_ICMS(rs.getInt("n.baseDeCalculoDo_ICMS"));
-               // nota.setBaseDeCalculoDo_ICMS_ST(rs.getInt("n.baseDeCalculoDo_ICMS_ST"));
-               //  nota.setValorDo_ICMS(rs.getDouble("n.valorDo_ICMS"));
-               // nota.setValorDo_ICMS_substituicao(rs.getDouble("n.valorDo_ICMS_substituicao"));
+                nota.setBaseDeCalculoDo_ICMS(rs.getInt("n.baseDeCalculoDo_ICMS"));
+                nota.setBaseDeCalculoDo_ICMS_ST(rs.getInt("n.baseDeCalculoDo_ICMS_ST"));
+                nota.setValorDo_ICMS(rs.getDouble("n.valorDo_ICMS"));
+                nota.setValorDo_ICMS_substituicao(rs.getDouble("n.valorDo_ICMS_substituicao"));
+                
+                nota.setIdTransportador(rs.getInt("n.idTransportador"));
+                nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
+                
+                
 
                 notas.add(nota);
             }
-            
+
             // conn.commit();
         } catch (SQLException ex) {
             Logger.getLogger(NotaDao.class.getName()).log(Level.SEVERE, null, ex);

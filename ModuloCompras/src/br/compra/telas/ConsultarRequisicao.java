@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ConsultarRequisicao extends javax.swing.JInternalFrame {
 
-    private RequisicaoDao reqDao = new RequisicaoDao();
+    private final RequisicaoDao reqDao = new RequisicaoDao();
     private List<RequisicaoGetSet> req;
     private DefaultTableModel model;
     private DefaultTableModel model1;

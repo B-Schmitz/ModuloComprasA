@@ -10,16 +10,21 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
 
     private NotaGetSet nota;
     private final NotaDao notaDao = new NotaDao();
+    private final DefaultTableModel model_nota;
+    private final DefaultTableModel model_imposto;
+    private List<NotaGetSet> notas;
 
     public NotaFiscal() {
         initComponents();
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/receipt_invoice.png"));
         AtualizaLista();
+        model_nota = (DefaultTableModel) tabela_notasfiscais.getModel();
+        model_imposto = (DefaultTableModel) tabela_impostos.getModel();
     }
 
     public final void AtualizaLista() {
 
-        List<NotaGetSet> notas = notaDao.Read();
+        notas = notaDao.Read();
 
         DefaultTableModel model_nota = (DefaultTableModel) tabela_notasfiscais.getModel();
         model_nota.setNumRows(0);
@@ -40,7 +45,6 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela_itens = new javax.swing.JTable();
-        bnt_cadastrar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabela_impostos = new javax.swing.JTable();
@@ -147,10 +151,6 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95))
         );
-
-        bnt_cadastrar.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
-        bnt_cadastrar.setForeground(new java.awt.Color(51, 51, 55));
-        bnt_cadastrar.setText("Consultar");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Impostos"));
 
@@ -294,10 +294,6 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(202, 202, 202))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,9 +312,7 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,22 +328,19 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
 
     private void tabela_notasfiscaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_notasfiscaisMouseClicked
         if (evt.getClickCount() == 2) {
-            /*
-  DefaultTableModel model_imposto = (DefaultTableModel) tabela_notasfiscais.getModel();
-        model_imposto.setNumRows(0);
 
-        for (int i = 0; i < notas.size(); i++) {
-
-            model_imposto.addRow(new Object[]{notas.get(i).getBaseDeCalculoDo_ICMS(), notas.get(i).getBaseDeCalculoDo_ICMS_ST(), notas.get(i).getValorDo_ICMS(), notas.get(i).getValorDo_ICMS_substituicao()});
-
+            model_imposto.setNumRows(0);
+            // int i = -1;
+            int i = tabela_notasfiscais.getSelectedRow();
+            for (NotaGetSet nota1 : notas) {
+                model_imposto.addRow(new Object[]{notas.get(i).getBaseDeCalculoDo_ICMS(), notas.get(i).getBaseDeCalculoDo_ICMS_ST(), notas.get(i).getValorDo_ICMS(), notas.get(i).getValorDo_ICMS_substituicao(), 4});
+            }
         }
-             */
-        }
+
     }//GEN-LAST:event_tabela_notasfiscaisMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnt_cadastrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
