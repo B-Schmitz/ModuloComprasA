@@ -6,7 +6,8 @@ public class NotaGetSet {
 
     private Integer idVeiculo;
     private String modelo, marca, placa;
-    private Integer idTransportador, numeracao, peso_bruto, peso_liquido, codigo_antt;
+    private Integer idTransportador, numeracao, codigo_antt;
+    private float peso_bruto, peso_liquido;
     private Double frete, valorSeguro;
     private String nome, especie;
     private Integer idNotaFiscal, numero, baseDeCalculoDo_ICMS, baseDeCalculoDo_ICMS_ST;
@@ -72,19 +73,19 @@ public class NotaGetSet {
         this.numeracao = numeracao;
     }
 
-    public Integer getPeso_bruto() {
+    public float getPeso_bruto() {
         return peso_bruto;
     }
 
-    public void setPeso_bruto(Integer peso_bruto) {
+    public void setPeso_bruto(float peso_bruto) {
         this.peso_bruto = peso_bruto;
     }
 
-    public Integer getPeso_liquido() {
+    public float getPeso_liquido() {
         return peso_liquido;
     }
 
-    public void setPeso_liquido(Integer peso_liquido) {
+    public void setPeso_liquido(float peso_liquido) {
         this.peso_liquido = peso_liquido;
     }
 

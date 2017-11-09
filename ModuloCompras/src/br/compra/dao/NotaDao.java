@@ -40,14 +40,27 @@ public class NotaDao {
                 nota.setIdNotaFiscal(rs.getInt("n.idNotaFiscal"));
                 nota.setNumeracao(rs.getInt("n.numero"));
                 nota.setData_emissao(rs.getDate("n.data_emissao") + "");
+
                 nota.setBaseDeCalculoDo_ICMS(rs.getInt("n.baseDeCalculoDo_ICMS"));
                 nota.setBaseDeCalculoDo_ICMS_ST(rs.getInt("n.baseDeCalculoDo_ICMS_ST"));
                 nota.setValorDo_ICMS(rs.getDouble("n.valorDo_ICMS"));
                 nota.setValorDo_ICMS_substituicao(rs.getDouble("n.valorDo_ICMS_substituicao"));
 
-                nota.setIdTransportador(rs.getInt("n.idTransportador"));
-                nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
+              //nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
+                nota.setModelo(rs.getString("ve.modelo"));
+                nota.setMarca(rs.getString("ve.marca"));
+                nota.setPlaca(rs.getString("ve.placa"));
 
+             // nota.setIdTransportador(rs.getInt("n.idTransportador"));
+                nota.setEspecie(rs.getString("tra.especie"));
+                nota.setFrete(rs.getDouble("tra.frete"));
+                nota.setNome(rs.getString("tra.nome"));
+                nota.setNumeracao(rs.getInt("tra.numeracao"));
+                nota.setPeso_bruto(rs.getFloat("tra.peso_bruto"));
+                nota.setPeso_liquido(rs.getFloat("tra.peso_liquido"));
+                nota.setCodigo_antt(rs.getInt("tra.codigo_antt"));
+                nota.setValorSeguro(rs.getDouble("tra.valorSeguro"));
+                
                 notas.add(nota);
             }
 
@@ -61,17 +74,16 @@ public class NotaDao {
 
                 while (rs.next()) {
                     NotaItemGetSet notaItem = new NotaItemGetSet();
-                    
+
                     notaItem.setPreco(rs.getDouble("ni.preco"));
                     notaItem.setQuantidade(rs.getInt("ni.quantidade"));
                     notaItem.setIdNotaFiscal_Item(rs.getInt("ni.idNotaFiscal_Item"));
-                    ProdutoGetSet p  = new ProdutoGetSet();
+                    ProdutoGetSet p = new ProdutoGetSet();
                     p.setNome("p.nome");
-                    FornecedorGetSet f  = new FornecedorGetSet();
+                    FornecedorGetSet f = new FornecedorGetSet();
                     f.setNome("f.Nome");
                     notaItem.setF(f);
                     notaItem.setP(p);
-                   
 
                     notasItem.add(notaItem);
                     notas.get(i).setLisNotaItem(notasItem);
@@ -88,10 +100,3 @@ public class NotaDao {
     }
 
 }
-
-/*SELECT n.idNotaFiscal, n.baseDeCalculoDo_ICMS, n.baseDeCalculoDo_ICMS_ST, n.data_emissao,n.numero, n.valorDo_ICMS, n.valorDo_ICMS_substituicao,
-p.nome, es.nome, ci.nome, ba.nome, ru.Nome, e.CEP, tra.codigo_antt, tra.especie, tra.frete, tra.nome, tra.numeracao, tra.peso_bruto, tra.peso_liquido,
-tra.valorSeguro, ve.marca, ve.modelo, ve.placa FROM notafiscal n, endereco e, transportador tra, pais p, estado es, cidade ci, bairro ba, rua ru,
-veiculo ve WHERE n.idEndereco  = e.idEndereco and e.idPais = p.idPais and e.idEstado = es.idEstado and e.idCidade = ci.idCidade
- and e.idBairro = ba.idBairro and e.idRua = ru.idRua and n.idTransportador = tra.idTransportador and ve.idVeiculo = tra.idVeiculo;
- */

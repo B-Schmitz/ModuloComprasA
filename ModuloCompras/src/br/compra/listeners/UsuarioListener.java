@@ -45,6 +45,7 @@ public class UsuarioListener implements ActionListener {
                                     cadastrarUsuario.Limpar();
                                     JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso", "Cadastro concluído", JOptionPane.PLAIN_MESSAGE, new ImageIcon("src/br/compra/icones/add.png"));
                                     cadastrarUsuario.NormalizaTexto();
+                                    cadastrarUsuario.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Senha de administrador incorreta", "Cadastro falhou", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/br/compra/icones/exclamation.png"));
                                 }
