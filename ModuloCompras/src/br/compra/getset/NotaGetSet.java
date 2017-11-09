@@ -12,6 +12,15 @@ public class NotaGetSet {
     private String nome, especie;
     private Integer idNotaFiscal, numero, baseDeCalculoDo_ICMS, baseDeCalculoDo_ICMS_ST;
     private String data_emissao;
+    private EnderecoGetSet e;
+
+    public EnderecoGetSet getE() {
+        return e;
+    }
+
+    public void setE(EnderecoGetSet e) {
+        this.e = e;
+    }
 
     private Double valorDo_ICMS, valorDo_ICMS_substituicao;
     private Integer idEndereco;

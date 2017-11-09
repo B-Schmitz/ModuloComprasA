@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RequisicaoDao {
-    
 
     public void Insert(RequisicaoGetSet req) {
 
@@ -185,7 +184,7 @@ public class RequisicaoDao {
                         forn.setEmail(rs.getString("forn.email"));
                         forn.setCNPJ(rs.getString("forn.cnpj"));
                         forn.setCodigo(rs.getInt("idfornecedor") + "");
-                        forn.setTelefone(rs.getInt("forn.telefone") + "");
+                        forn.setTelefone(rs.getLong("forn.telefone") + "");
                         EnderecoGetSet end = new EnderecoGetSet();
                         end.setIdEndereco(rs.getInt("forn.idEndereco"));
                         forn.setE(end);

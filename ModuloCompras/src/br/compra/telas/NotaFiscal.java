@@ -11,9 +11,11 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
     private NotaGetSet nota;
     private final NotaDao notaDao = new NotaDao();
     private final DefaultTableModel model_nota;
+    private final DefaultTableModel model_endereco;
     private final DefaultTableModel model_imposto;
     private final DefaultTableModel model_transportador;
     private final DefaultTableModel model_itens;
+
     private List<NotaGetSet> notas;
 
     public NotaFiscal() {
@@ -23,6 +25,7 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
         model_imposto = (DefaultTableModel) tabela_impostos.getModel();
         model_transportador = (DefaultTableModel) tabela_transportador.getModel();
         model_itens = (DefaultTableModel) tabela_itens.getModel();
+        model_endereco = (DefaultTableModel) tabela_endereco.getModel();
         AtualizaLista();
 
     }
@@ -285,14 +288,9 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
             model_imposto.setNumRows(0);
             model_transportador.setNumRows(0);
             model_itens.setNumRows(0);
-            
-            if (tabela_notasfiscais.getSelectedRow() != -1) {
-                
-                for (int i = 0; i < notas.size(); i++) {
-                    model_imposto.addRow(new Object[]{notas.get(i).getBaseDeCalculoDo_ICMS(), notas.get(i).getBaseDeCalculoDo_ICMS_ST(), notas.get(i).getValorDo_ICMS(), notas.get(i).getValorDo_ICMS_substituicao(), 4});
-                    model_transportador.addRow(new Object[]{notas.get(i).getNome(), notas.get(i).getFrete(), notas.get(i).getEspecie(), notas.get(i).getNumeracao(), notas.get(i).getPeso_bruto(), notas.get(i).getPeso_liquido(), notas.get(i).getCodigo_antt(), notas.get(i).getValorSeguro(), 8});
-                }
+            model_endereco.setNumRows(0);
 
+            if (tabela_notasfiscais.getSelectedRow() != -1) {
                 Integer codNota = (Integer) model_nota.getValueAt(tabela_notasfiscais.getSelectedRow(), 0);
                 nota = new NotaGetSet();
 
@@ -305,13 +303,16 @@ public class NotaFiscal extends javax.swing.JInternalFrame {
                     }
                 }
 
+                model_endereco.addRow(new Object[]{nota.getE().getPais(), nota.getE().getEstado(), nota.getE().getCidade(), nota.getE().getBairro(), nota.getE().getRua(), nota.getE().getCEP()});
+                model_imposto.addRow(new Object[]{nota.getBaseDeCalculoDo_ICMS(), nota.getBaseDeCalculoDo_ICMS_ST(), nota.getValorDo_ICMS(), nota.getValorDo_ICMS_substituicao()});
+                model_transportador.addRow(new Object[]{nota.getNome(), nota.getFrete(), nota.getEspecie(), nota.getNumeracao(), nota.getPeso_bruto(), nota.getPeso_liquido(), nota.getCodigo_antt(), nota.getValorSeguro()});
+
                 for (int j = 0; j < nota.getLisNotaItem().size(); j++) {
-                    model_itens.addRow(new Object[]{nota.getLisNotaItem().get(j).getIdProduto(), nota.getLisNotaItem().get(j).getP().getNome(), nota.getLisNotaItem().get(j).getQuantidade(), nota.getLisNotaItem().get(j).getPreco(), 4});
+                    model_itens.addRow(new Object[]{nota.getLisNotaItem().get(j).getIdProduto(), nota.getLisNotaItem().get(j).getP().getNome(), nota.getLisNotaItem().get(j).getQuantidade(), nota.getLisNotaItem().get(j).getPreco()});
 
                 }
             }
         }
-
     }//GEN-LAST:event_tabela_notasfiscaisMouseClicked
 
 

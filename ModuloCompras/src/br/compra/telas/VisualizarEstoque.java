@@ -62,7 +62,6 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabela_produtos.setColumnSelectionAllowed(true);
         tabela_produtos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabela_produtos.getTableHeader().setReorderingAllowed(false);
         tabela_produtos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -71,7 +70,18 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(tabela_produtos);
-        tabela_produtos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (tabela_produtos.getColumnModel().getColumnCount() > 0) {
+            tabela_produtos.getColumnModel().getColumn(0).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(1).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(2).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(3).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(4).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(5).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(6).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(7).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(8).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(9).setResizable(false);
+        }
 
         tabela_fornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

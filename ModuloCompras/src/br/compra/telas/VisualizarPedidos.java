@@ -73,13 +73,14 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
         btn_baixa = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("Consultar Pedido");
 
         tabela_ProdXForn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Produto", "Quantidade", "preço", "Data Prevista de entrega", "Forneceor"
+                "Produto", "Quantidade", "Preço", "Data prevista de entrega", "Fornecedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -90,6 +91,7 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela_ProdXForn.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabela_ProdXForn);
         if (tabela_ProdXForn.getColumnModel().getColumnCount() > 0) {
             tabela_ProdXForn.getColumnModel().getColumn(0).setResizable(false);
@@ -119,12 +121,18 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela_Pedido.getTableHeader().setReorderingAllowed(false);
         tabela_Pedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabela_PedidoMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tabela_Pedido);
+        if (tabela_Pedido.getColumnModel().getColumnCount() > 0) {
+            tabela_Pedido.getColumnModel().getColumn(0).setResizable(false);
+            tabela_Pedido.getColumnModel().getColumn(1).setResizable(false);
+            tabela_Pedido.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btn_baixa.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         btn_baixa.setForeground(new java.awt.Color(51, 51, 55));

@@ -263,6 +263,7 @@ public void RecebeTipo(String Tipo) {
 
     private void menu_notafiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_notafiscalActionPerformed
         Janela(nota);
+        nota.AtualizaLista();
     }//GEN-LAST:event_menu_notafiscalActionPerformed
 
     private void menu_consultar_requisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultar_requisicaoActionPerformed

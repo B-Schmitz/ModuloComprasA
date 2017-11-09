@@ -119,17 +119,16 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
         txt_solicitante.setText(null);
         txt_observacao.setText(null);
         comboBox_prioridade.setSelectedIndex(0);
-        if (model.getRowCount() != 0) {
-            model.setRowCount(0);
-        }
+        model.setNumRows(0);
+
     }
 
     public boolean Verifica() {
-         
+
         return !(model.getRowCount() == 0
-               || txt_chefe.getText().trim().isEmpty()
-               || txt_setor.getText().trim().isEmpty()
-               || txt_solicitante.getText().trim().isEmpty());
+                || txt_chefe.getText().trim().isEmpty()
+                || txt_setor.getText().trim().isEmpty()
+                || txt_solicitante.getText().trim().isEmpty());
     }
 
     @SuppressWarnings("unchecked")
