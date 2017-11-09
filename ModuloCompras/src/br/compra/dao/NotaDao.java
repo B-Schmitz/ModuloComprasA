@@ -46,12 +46,12 @@ public class NotaDao {
                 nota.setValorDo_ICMS(rs.getDouble("n.valorDo_ICMS"));
                 nota.setValorDo_ICMS_substituicao(rs.getDouble("n.valorDo_ICMS_substituicao"));
 
-              //nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
+                //nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
                 nota.setModelo(rs.getString("ve.modelo"));
                 nota.setMarca(rs.getString("ve.marca"));
                 nota.setPlaca(rs.getString("ve.placa"));
 
-             // nota.setIdTransportador(rs.getInt("n.idTransportador"));
+                // nota.setIdTransportador(rs.getInt("n.idTransportador"));
                 nota.setEspecie(rs.getString("tra.especie"));
                 nota.setFrete(rs.getDouble("tra.frete"));
                 nota.setNome(rs.getString("tra.nome"));
@@ -60,11 +60,11 @@ public class NotaDao {
                 nota.setPeso_liquido(rs.getFloat("tra.peso_liquido"));
                 nota.setCodigo_antt(rs.getInt("tra.codigo_antt"));
                 nota.setValorSeguro(rs.getDouble("tra.valorSeguro"));
-                
+
                 notas.add(nota);
             }
 
-            sql = "SELECT ni.idNotaFiscal_Item,ni.quantidade,ni.preco, p.nome , f.Nome FROM notafiscal_item ni,produto p ,fornecedor f  WHERE p.idProduto = ni.idProduto AND f.idFornecedor = ni.idFornecedor AND ni.idNotaFiscal_Item = ?;";
+            sql = "SELECT ni.idNotaFiscal_Item, ni.idProduto, ni.quantidade, ni.preco, p.nome , f.Nome FROM notafiscal_item ni,produto p ,fornecedor f  WHERE p.idProduto = ni.idProduto AND f.idFornecedor = ni.idFornecedor AND ni.idNotaFiscal_Item = ?;";
             ps = conn.prepareStatement(sql);
 
             for (int i = 0; i < notas.size(); i++) {
@@ -78,8 +78,9 @@ public class NotaDao {
                     notaItem.setPreco(rs.getDouble("ni.preco"));
                     notaItem.setQuantidade(rs.getInt("ni.quantidade"));
                     notaItem.setIdNotaFiscal_Item(rs.getInt("ni.idNotaFiscal_Item"));
+                    notaItem.setIdProduto(rs.getInt("ni.idProduto"));
                     ProdutoGetSet p = new ProdutoGetSet();
-                    p.setNome("p.nome");
+                    p.setNome(rs.getString("p.nome"));
                     FornecedorGetSet f = new FornecedorGetSet();
                     f.setNome("f.Nome");
                     notaItem.setF(f);
