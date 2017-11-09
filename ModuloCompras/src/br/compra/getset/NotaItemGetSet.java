@@ -7,6 +7,24 @@ public class NotaItemGetSet {
     
      private Integer idNotaFiscal_Item,quantidade,idProduto,idNotaFiscal,idFornecedor;
      private Double preco;
+     private ProdutoGetSet p;
+     private FornecedorGetSet f;
+
+    public ProdutoGetSet getP() {
+        return p;
+    }
+
+    public void setP(ProdutoGetSet p) {
+        this.p = p;
+    }
+
+    public FornecedorGetSet getF() {
+        return f;
+    }
+
+    public void setF(FornecedorGetSet f) {
+        this.f = f;
+    }
 
     public Integer getIdNotaFiscal_Item() {
         return idNotaFiscal_Item;

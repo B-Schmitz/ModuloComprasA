@@ -1,6 +1,9 @@
 package br.compra.dao;
 
+import br.compra.getset.FornecedorGetSet;
 import br.compra.getset.NotaGetSet;
+import br.compra.getset.NotaItemGetSet;
+import br.compra.getset.ProdutoGetSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +22,7 @@ public class NotaDao {
         PreparedStatement ps = null;
 
         List<NotaGetSet> notas = new ArrayList<>();
+        List<NotaItemGetSet> notasItem = new ArrayList<>();
 
         try {
             conn = Conexao.getConnection();
@@ -40,15 +44,40 @@ public class NotaDao {
                 nota.setBaseDeCalculoDo_ICMS_ST(rs.getInt("n.baseDeCalculoDo_ICMS_ST"));
                 nota.setValorDo_ICMS(rs.getDouble("n.valorDo_ICMS"));
                 nota.setValorDo_ICMS_substituicao(rs.getDouble("n.valorDo_ICMS_substituicao"));
-                
+
                 nota.setIdTransportador(rs.getInt("n.idTransportador"));
                 nota.setIdVeiculo(rs.getInt("tra.idVeiculo"));
-                
-                
 
                 notas.add(nota);
             }
 
+            sql = "SELECT ni.idNotaFiscal_Item,ni.quantidade,ni.preco, p.nome , f.Nome FROM notafiscal_item ni,produto p ,fornecedor f  WHERE p.idProduto = ni.idProduto AND f.idFornecedor = ni.idFornecedor AND ni.idNotaFiscal_Item = ?;";
+            ps = conn.prepareStatement(sql);
+
+            for (int i = 0; i < notas.size(); i++) {
+
+                ps.setInt(1, notas.get(i).getIdNotaFiscal());
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    NotaItemGetSet notaItem = new NotaItemGetSet();
+                    
+                    notaItem.setPreco(rs.getDouble("ni.preco"));
+                    notaItem.setQuantidade(rs.getInt("ni.quantidade"));
+                    notaItem.setIdNotaFiscal_Item(rs.getInt("ni.idNotaFiscal_Item"));
+                    ProdutoGetSet p  = new ProdutoGetSet();
+                    p.setNome("p.nome");
+                    FornecedorGetSet f  = new FornecedorGetSet();
+                    f.setNome("f.Nome");
+                    notaItem.setF(f);
+                    notaItem.setP(p);
+                   
+
+                    notasItem.add(notaItem);
+                    notas.get(i).setLisNotaItem(notasItem);
+                }
+
+            }
             // conn.commit();
         } catch (SQLException ex) {
             Logger.getLogger(NotaDao.class.getName()).log(Level.SEVERE, null, ex);
