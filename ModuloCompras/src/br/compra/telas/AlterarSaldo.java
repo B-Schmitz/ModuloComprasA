@@ -20,7 +20,6 @@ public class AlterarSaldo extends javax.swing.JInternalFrame {
         AtualizaLista();
     }
 
-
     public final void AtualizaLista() {
 
         List<ProdutoGetSet> lisP = produtoDao.Read();
@@ -40,7 +39,6 @@ public class AlterarSaldo extends javax.swing.JInternalFrame {
         if (tabela_produtos.getSelectedRow() != -1) {
             prod = new ProdutoGetSet();
             prod.setSaldo(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o saldo adicional", "Adicionar saldo", 1)));
-            System.out.println(prod.getSaldo());
             prod.setNome(model.getValueAt(tabela_produtos.getSelectedRow(), 1).toString());
             produtoDao.Update(prod);
             AtualizaLista();

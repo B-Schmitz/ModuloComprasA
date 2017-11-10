@@ -1,4 +1,3 @@
-
 package br.compra.telas;
 
 import br.compra.dao.RequisicaoDao;
@@ -8,7 +7,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ConsultarRequisicao extends javax.swing.JInternalFrame {
 
     private final RequisicaoDao reqDao = new RequisicaoDao();
@@ -16,84 +14,80 @@ public class ConsultarRequisicao extends javax.swing.JInternalFrame {
     private DefaultTableModel model;
     private DefaultTableModel model1;
     private Principal p;
- 
+
     public ConsultarRequisicao() {
         initComponents();
         bnt_aprovar.addActionListener(new ConsultaReqListener(this));
         bnt_reprovar.addActionListener(new ConsultaReqListener(this));
-         this.setFrameIcon(new ImageIcon("src/br/compra/icones/search_field.png"));
-        
-      
+        this.setFrameIcon(new ImageIcon("src/br/compra/icones/search_field.png"));
+
     }
-    public void AtualizaReq(){
-          req = reqDao.read();
-        
-         model = (DefaultTableModel) TabelaAprovReq.getModel();
-         model1 = (DefaultTableModel) TabelaAprovProd.getModel();
-         
-         model.setNumRows(0);
+
+    public void AtualizaReq() {
+        req = reqDao.read();
+
+        model = (DefaultTableModel) TabelaAprovReq.getModel();
+        model1 = (DefaultTableModel) TabelaAprovProd.getModel();
+
+        model.setNumRows(0);
 
         for (int i = 0; i < req.size(); i++) {
 
-            model.addRow(new Object[]{req.get(i).getNumRequisicao(),req.get(i).getSetor(),
-            req.get(i).getSolicitante(),req.get(i).getChefe(),req.get(i).getPrioridade(),req.get(i).getData(),req.get(i).getObservacoes()});
-            
-          
+            model.addRow(new Object[]{req.get(i).getNumRequisicao(), req.get(i).getSetor(),
+                req.get(i).getSolicitante(), req.get(i).getChefe(), req.get(i).getPrioridade(), req.get(i).getData(), req.get(i).getObservacoes()});
+
         }
     }
-    
-    public void reprovar(){
+
+    public void reprovar() {
         int linha = TabelaAprovReq.getSelectedRow();
-        
-        if(linha != -1){
-        Integer idReq  = (Integer)model.getValueAt(linha, 0);
-       
-        for(int i = 0; i < req.size(); i ++){
-            
-            if(idReq.equals(req.get(i).getNumRequisicao())){
-                reqDao.Delete(req.get(i));
-                break;
+
+        if (linha != -1) {
+            Integer idReq = (Integer) model.getValueAt(linha, 0);
+
+            for (int i = 0; i < req.size(); i++) {
+
+                if (idReq.equals(req.get(i).getNumRequisicao())) {
+                    reqDao.Delete(req.get(i));
+                    break;
+                }
+
             }
-            
-        }
-        model1.setNumRows(0);
-        
-        AtualizaReq();
+            model1.setNumRows(0);
+
+            AtualizaReq();
         }
     }
-    
-    
-      public void setPrincipal(Principal p){
-        
+
+    public void setPrincipal(Principal p) {
+
         this.p = p;
-      
-        
-    }
-      
-      public void inicia(){
-          model = (DefaultTableModel) TabelaAprovReq.getModel();
-          
-          if(TabelaAprovReq.getSelectedRow() != -1){
-          String id = model.getValueAt(TabelaAprovReq.getSelectedRow(), 0) +"";
-          
-          
-          p.IniciaColeta(req ,Integer.parseInt(id));
-      }
-      }
-    public void MostraProdutos(){
-        
-          model1.setNumRows(0);
-          int i = -1;
-          i = TabelaAprovReq.getSelectedRow();
-          for(int j = 0; j < req.get(i).getLisproduto().size(); j++){
 
-            model1.addRow(new Object[]{req.get(i).getLisproduto().get(j).getCodigo(),req.get(i).getLisproduto().get(j).getNome(),req.get(i).getQuantidade().get(j)});
-            
-            }
-        
     }
 
- 
+    public void inicia() {
+        model = (DefaultTableModel) TabelaAprovReq.getModel();
+
+        if (TabelaAprovReq.getSelectedRow() != -1) {
+            String id = model.getValueAt(TabelaAprovReq.getSelectedRow(), 0) + "";
+
+            p.IniciaColeta(req, Integer.parseInt(id));
+        }
+    }
+
+    public void MostraProdutos() {
+
+        model1.setNumRows(0);
+        int i = -1;
+        i = TabelaAprovReq.getSelectedRow();
+        for (int j = 0; j < req.get(i).getLisproduto().size(); j++) {
+
+            model1.addRow(new Object[]{req.get(i).getLisproduto().get(j).getCodigo(), req.get(i).getLisproduto().get(j).getNome(), req.get(i).getQuantidade().get(j)});
+
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -104,11 +98,29 @@ public class ConsultarRequisicao extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TabelaAprovProd = new javax.swing.JTable();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jLabel1 = new javax.swing.JLabel();
         bnt_reprovar = new javax.swing.JButton();
         bnt_aprovar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Consultar Requisição");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aprovar Requisições", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -169,33 +181,41 @@ public class ConsultarRequisicao extends javax.swing.JInternalFrame {
             TabelaAprovProd.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Produtos Solicitados");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addContainerGap())))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bnt_reprovar.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
@@ -239,11 +259,15 @@ public class ConsultarRequisicao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TabelaAprovReqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaAprovReqMouseClicked
-        if(evt.getClickCount() == 2){
-            
+        if (evt.getClickCount() == 2) {
+
             MostraProdutos();
         }
     }//GEN-LAST:event_TabelaAprovReqMouseClicked
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+     model1.setNumRows(0);
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -252,6 +276,7 @@ public class ConsultarRequisicao extends javax.swing.JInternalFrame {
     private javax.swing.JButton bnt_aprovar;
     private javax.swing.JButton bnt_reprovar;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
