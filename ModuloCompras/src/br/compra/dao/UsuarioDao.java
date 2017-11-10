@@ -49,10 +49,15 @@ public class UsuarioDao {
             rs = ps.executeQuery();
 
             while (rs.next()) {
+                
+                String u = rs.getString("nome");
+                
+                if(u.equals(usuario.getUsuario())){
                 usuario.setUsuario(rs.getString("nome"));
                 usuario.setSenha(rs.getString("senha"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setTipo(rs.getString("tipo"));
+                }
             }
 
             // conn.commit();
@@ -75,7 +80,17 @@ public class UsuarioDao {
             ps.setString(1, usuario.getUsuario());
             ps.setString(2, usuario.getEmail());
             rs = ps.executeQuery();
-            return rs.next();
+           while(rs.next()){
+               
+               String usuari = rs.getString("nome");
+               if(usuario.getUsuario().equals(usuari)){
+                   
+                   
+                  return true;
+                   
+               }
+               
+           }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }

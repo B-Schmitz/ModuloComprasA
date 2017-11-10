@@ -222,7 +222,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_usuario">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_usuarioFocusLost"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_usuarioFocusGained"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="label_tipo">

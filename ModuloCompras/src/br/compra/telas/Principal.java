@@ -292,8 +292,12 @@ public void RecebeTipo(String Tipo) {
     }//GEN-LAST:event_menu_coleta_precoActionPerformed
 
     private void menu_consultar_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultar_pedidoActionPerformed
+       if (Tipo.equals("A")) {
         Janela(visualizar_Pedidos);
         visualizar_Pedidos.AtualizaTabela();
+       } else {
+            JOptionPane.showMessageDialog(null, "Você não possui acesso a essa função", "Permissão negada!", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/br/compra/icones/exclamation.png"));
+        }
     }//GEN-LAST:event_menu_consultar_pedidoActionPerformed
 
     /**

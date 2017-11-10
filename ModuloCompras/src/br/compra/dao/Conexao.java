@@ -15,7 +15,7 @@ public class Conexao {
     private static final String Drive = "com.mysql.jdbc.Driver";
     private static final String Url = "jdbc:mysql://localhost:3306/modulocompras";
     private static final String User = "root";
-    private static final String Pass = "";
+    private static final String Pass = "comp16";
 
     public static Connection getConnection() {
         Connection conn = null;

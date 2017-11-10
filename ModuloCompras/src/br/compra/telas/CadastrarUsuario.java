@@ -165,8 +165,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         });
 
         txt_usuario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_usuarioFocusLost(evt);
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_usuarioFocusGained(evt);
             }
         });
 
@@ -273,11 +273,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_usuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usuarioFocusLost
-        txt_usuario.setBackground(Color.WHITE);
-        txt_usuario.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txt_usuarioFocusLost
-
     private void txt_senhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_senhaFocusGained
         txt_senha.setBackground(Color.WHITE);
         txt_senha.setForeground(Color.BLACK);
@@ -289,8 +284,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_confirmar_senhaFocusGained
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-       Limpar();
+        Limpar();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txt_usuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usuarioFocusGained
+        txt_usuario.setBackground(Color.WHITE);
+        txt_usuario.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txt_usuarioFocusGained
 
     /**
      * @param args the command line arguments

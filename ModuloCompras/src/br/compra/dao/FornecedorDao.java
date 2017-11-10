@@ -29,7 +29,7 @@ public class FornecedorDao {
             ps.setInt(1, Integer.parseInt(f.getCodigo()));
             ps.setString(2, f.getNome());
             ps.setLong(3, Long.parseLong(f.getCNPJ()));
-            ps.setInt(4, Integer.parseInt(f.getTelefone()));
+            ps.setLong(4, Long.parseLong(f.getTelefone()));
             ps.setString(5, f.getEmail());
             ps.setInt(6, f.getE().getIdEndereco());
             ps.setInt(7, f.getCat().getCodigo());
