@@ -2,6 +2,8 @@ package br.compra.telas;
 
 import br.compra.dao.CategoriaDao;
 import br.compra.dao.FornecedorDao;
+import br.compra.excecoes.Letras;
+import br.compra.excecoes.Numeros;
 import br.compra.getset.CategoriaGetSet;
 import br.compra.getset.EnderecoGetSet;
 import br.compra.getset.FornecedorGetSet;
@@ -27,6 +29,11 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         btn_limpar.addActionListener(new FornecedorListener(this));
         btn_cadastrar.addActionListener(new FornecedorListener(this));
         btn_novo.addActionListener(new FornecedorListener(this));
+        txt_bairro.setDocument(new Letras());
+        txt_cidade.setDocument(new Letras());
+        txt_estado.setDocument(new Letras());
+        txt_pais.setDocument(new Letras());
+        txt_cep.setDocument(new Numeros());
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/lorry.png"));
         try {
             AtualizaCodigo();
@@ -62,7 +69,7 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         forn.setCodigo(txt_codigo.getText());
         forn.setEmail(txt_email.getText());
         forn.setNome(txt_nome.getText());
-        forn.setTelefone(txt_telefone.getText());
+        forn.setTelefone(txt_telefone.getText().replaceAll("[-,(,)]", ""));
 
         CategoriaGetSet cat = new CategoriaGetSet();
         cat.setNome(combo_categoria.getSelectedItem().toString());
@@ -84,7 +91,7 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
     public boolean Verifica() {
         return !(txt_nome.getText().trim().isEmpty()
                 || txt_cnpj.getText().replaceAll("[-,/,/.]", "").trim().isEmpty()
-                || txt_telefone.getText().trim().isEmpty()
+                || txt_telefone.getText().replaceAll("[-,(,)]", "").trim().isEmpty()
                 || txt_email.getText().trim().isEmpty()
                 || txt_pais.getText().trim().isEmpty()
                 || txt_estado.getText().trim().isEmpty()
@@ -98,6 +105,7 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         txt_nome.setText(null);
         txt_email.setText(null);
         txt_telefone.setText(null);
+         txt_telefone.setFocusLostBehavior(JFormattedTextField.PERSIST);
         txt_nome.setText(null);
         txt_cnpj.setText(null);
         txt_cnpj.setFocusLostBehavior(JFormattedTextField.PERSIST);
@@ -147,7 +155,6 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         label_nome = new javax.swing.JLabel();
         label_cnpj = new javax.swing.JLabel();
         txt_nome = new javax.swing.JTextField();
-        txt_telefone = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         label_telefone = new javax.swing.JLabel();
         label_email = new javax.swing.JLabel();
@@ -157,6 +164,7 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         txt_cnpj = new javax.swing.JFormattedTextField();
         combo_categoria = new javax.swing.JComboBox<>();
         btn_novo = new javax.swing.JButton();
+        txt_telefone = new javax.swing.JFormattedTextField();
         btn_limpar = new javax.swing.JButton();
         btn_cadastrar = new javax.swing.JButton();
 
@@ -294,6 +302,12 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
         btn_novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_novo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        try {
+            txt_telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout painel_fornecedorLayout = new javax.swing.GroupLayout(painel_fornecedor);
         painel_fornecedor.setLayout(painel_fornecedorLayout);
         painel_fornecedorLayout.setHorizontalGroup(
@@ -307,20 +321,21 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(label_telefone)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txt_nome, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addGroup(painel_fornecedorLayout.createSequentialGroup()
-                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(label_cnpj)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_cnpj))
-                    .addGroup(painel_fornecedorLayout.createSequentialGroup()
-                        .addComponent(combo_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_novo)))
+                .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(txt_nome, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addGroup(painel_fornecedorLayout.createSequentialGroup()
+                            .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(label_cnpj)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_cnpj))
+                        .addGroup(painel_fornecedorLayout.createSequentialGroup()
+                            .addComponent(combo_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_novo)))
+                    .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painel_fornecedorLayout.setVerticalGroup(
@@ -341,15 +356,15 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(label_email)
                     .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_telefone)
                     .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painel_fornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(combo_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_novo))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btn_limpar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
@@ -465,6 +480,6 @@ public class CadastrarFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_pais;
     private javax.swing.JTextField txt_rua;
-    private javax.swing.JTextField txt_telefone;
+    private javax.swing.JFormattedTextField txt_telefone;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@ package br.compra.telas;
 
 import br.compra.dao.CategoriaDao;
 import br.compra.dao.ProdutoDao;
+import br.compra.excecoes.Numeros;
 import br.compra.getset.CategoriaGetSet;
 import br.compra.getset.ProdutoGetSet;
 import br.compra.listeners.ProdutoListener;
@@ -35,6 +36,12 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         bnt_limpar.addActionListener(new ProdutoListener(this));
         btn_novo.addActionListener(new ProdutoListener(this));
         bnt_alterar_saldo.addActionListener(new ProdutoListener(this));
+        txt_estoqueMax.setDocument(new Numeros());
+        txt_estoqueMin.setDocument(new Numeros());
+        txt_saldo.setDocument(new Numeros());
+        txt_precoCompra.setDocument(new Numeros());
+        txt_precoUnitario.setDocument(new Numeros());
+        txt_precoVenda.setDocument(new Numeros());
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/box_closed.png"));
 
         DataAtual();

@@ -1,5 +1,6 @@
 package br.compra.telas;
 
+import br.compra.excecoes.Letras;
 import br.compra.getset.UsuarioGetSet;
 import br.compra.listeners.UsuarioListener;
 import java.awt.Color;
@@ -16,6 +17,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         bnt_cadastrar.addActionListener(new UsuarioListener(this));
         bnt_limpar.addActionListener(new UsuarioListener(this));
         icone = new ImageIcon("src/br/compra/icones/user_add.png");
+        txt_usuario.setDocument(new Letras());
         this.setIconImage(icone.getImage());
 
     }

@@ -1,6 +1,7 @@
 package br.compra.telas;
 
 import br.compra.dao.RequisicaoDao;
+import br.compra.excecoes.Letras;
 import br.compra.getset.ProdutoGetSet;
 import br.compra.getset.RequisicaoGetSet;
 import br.compra.listeners.RequisicaoListener;
@@ -35,6 +36,10 @@ public class RequisicaoCompra extends javax.swing.JInternalFrame {
         bnt_inserir.addActionListener(new RequisicaoListener(this));
         bnt_limpar.addActionListener(new RequisicaoListener(this));
         model = (DefaultTableModel) tabela_produto.getModel();
+        txt_solicitante.setDocument(new Letras());
+        txt_chefe.setDocument(new Letras());
+        txt_setor.setDocument(new Letras());
+        
         this.setFrameIcon(new ImageIcon("src/br/compra/icones/cart_add.png"));
 
         DataAtual();
