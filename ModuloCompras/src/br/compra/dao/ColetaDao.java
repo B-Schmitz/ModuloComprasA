@@ -38,7 +38,7 @@ public class ColetaDao {
                     lis.get(i).setCodigoColeta(rs.getInt("max(idColeta_preco)"));
                 }
 
-                sql = "insert into coleta_preco_item (data_prevista,quantidade,idColeta_preco,idProduto,idfornecedor) values(?,?,?,?,?); ";
+                sql = "insert into coleta_preco_item (data_prevista,quantidade,idColeta_preco,idProduto,idfornecedor,preco) values(?,?,?,?,?,?); ";
                 ps = conn.prepareStatement(sql);
 
                 DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
@@ -54,6 +54,7 @@ public class ColetaDao {
                 ps.setInt(3, lis.get(i).getCodigoColeta());
                 ps.setInt(4, Integer.valueOf(lis.get(i).getP().getCodigo()));
                 ps.setInt(5, Integer.valueOf(lis.get(i).getF().getCodigo()));
+                ps.setDouble(6, lis.get(i).getPreco_unitario());
 
                 ps.execute();
                 // conn.commit();

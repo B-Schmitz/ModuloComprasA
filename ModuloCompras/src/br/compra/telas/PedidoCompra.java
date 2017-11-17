@@ -101,7 +101,6 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
     public PedidoGetSet getPedido() {
         pedido = new PedidoGetSet();
         List<PedidoItemGetSet> pItem = new ArrayList<>();
-        List<FornecedorGetSet> lisf = new ArrayList<>();
 
         pedido.setIdPedidoCompra(Integer.parseInt(txt_numero_pedido.getText()));
         pedido.setData(txt_data.getText());
@@ -109,6 +108,7 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < model.getRowCount(); i++) {
 
+            List<FornecedorGetSet> lisf = new ArrayList<>();
             PedidoItemGetSet pi = new PedidoItemGetSet();
             ProdutoGetSet prod = new ProdutoGetSet();
             FornecedorGetSet forn = new FornecedorGetSet();
@@ -119,6 +119,7 @@ public final class PedidoCompra extends javax.swing.JInternalFrame {
             pi.setPreco((Double) model.getValueAt(i, 3));
             pi.setDataPrevista((String) model.getValueAt(i, 4));
             forn.setCodigo((String) model.getValueAt(i, 6));
+            pi.setPrecoUni(pi.getPreco()/pi.getQuantidade());
 
             lisf.add(forn);
             prod.setF(lisf);

@@ -6,6 +6,16 @@ public class PedidoItemGetSet {
     
     private Integer idPedidoCompraItem,quantidade,idPedidoCompra;
     private String dataPrevista;
+    private Double preco,precoUni;
+
+    public Double getPrecoUni() {
+        return precoUni;
+    }
+
+    public void setPrecoUni(Double precoUni) {
+        this.precoUni = precoUni;
+    }
+    private ProdutoGetSet p;
 
     public Integer getIdPedidoCompraItem() {
         return idPedidoCompraItem;
@@ -54,8 +64,6 @@ public class PedidoItemGetSet {
     public void setP(ProdutoGetSet p) {
         this.p = p;
     }
-    private Double preco;
-    private ProdutoGetSet p;
 
     
     

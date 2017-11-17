@@ -109,7 +109,7 @@ public class Lexls {
                                             break;
 
                                         case 3:
-                                            c.setPreco_unitario(Double.valueOf(str));
+                                            c.setPreco_unitario(Double.valueOf(str.replace("[,]", ".")));
                                             break;
 
                                         case 4:
