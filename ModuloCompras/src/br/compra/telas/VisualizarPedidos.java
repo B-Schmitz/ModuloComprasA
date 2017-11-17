@@ -30,7 +30,6 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lisP.size(); i++) {
 
-                System.out.println("e:" + lisP.get(i).getIdPedidoCompra() + "e" + modelp.getValueAt(tabela_Pedido.getSelectedRow(), 0));
                 if (lisP.get(i).getIdPedidoCompra() == modelp.getValueAt(tabela_Pedido.getSelectedRow(), 0)) {
 
                     p = lisP.get(i);
@@ -41,7 +40,6 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
             }
 
         }
-        System.out.println("PP: " + p.getIdPedidoCompra());
         return p;
     }
 
