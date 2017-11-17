@@ -97,7 +97,7 @@ public class Lexls {
                                             break;
                                     }
 
-                                } else if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()){
+                                } else if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) {
                                     System.out.println("TIPO NUMERICO: " + cell.getNumericCellValue());
                                     Double str1 = cell.getNumericCellValue();
                                     String str = str1.toString();
@@ -109,7 +109,7 @@ public class Lexls {
                                             break;
 
                                         case 3:
-                                            c.setPreco_unitario(Double.valueOf(str.replace("[,]", ".")));
+                                            c.setPreco_unitario(Double.valueOf(str));
                                             break;
 
                                         case 4:
@@ -131,7 +131,9 @@ public class Lexls {
 
                             }
                         }
-                      
+                        //  lisColta.add(c);
+                        /* case Cell.CELL_TYPE_FORMULA:
+                            System.out.println("TIPO FORMULA: " + cell.getCellFormula());*/
                     }
                     if (linha > 0) {
 

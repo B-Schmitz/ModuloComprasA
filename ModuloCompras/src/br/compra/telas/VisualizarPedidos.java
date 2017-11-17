@@ -41,7 +41,7 @@ public class VisualizarPedidos extends javax.swing.JInternalFrame {
             }
 
         }
-      
+        System.out.println("PP: " + p.getIdPedidoCompra());
         return p;
     }
 

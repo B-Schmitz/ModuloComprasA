@@ -101,11 +101,11 @@ public class GerarXls {
                 for (int j = 0; j < f.get(i).getP().size(); j++) {
                     linha = sheet.createRow(j + 1);
                     cel = linha.createCell(0);
-                    cel.setCellValue(f.get(i).getP().get(j).getCodigo());
+                    cel.setCellValue(p.get(j).getCodigo());
                     cel = linha.createCell(1);
-                    cel.setCellValue(f.get(i).getP().get(j).getNome());
+                    cel.setCellValue(p.get(j).getNome());
                     cel = linha.createCell(2);
-                    cel.setCellValue(Integer.parseInt(f.get(i).getP().get(j).getquant()));
+                    cel.setCellValue(Integer.parseInt(p.get(j).getquant()));
                     cel = linha.createCell(6);
                     cel.setCellValue(f.get(i).getNome());
                 
