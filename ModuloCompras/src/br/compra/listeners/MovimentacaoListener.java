@@ -22,9 +22,9 @@ public class MovimentacaoListener implements ActionListener{
         if (e.getActionCommand().equals("Cadastrar")) {
 
       
-            mov = movimentacao.getMovimentacao();
+           
 
-            System.out.println(mov.toString());
+          
 
         }
 

@@ -256,6 +256,7 @@ public void RecebeTipo(String Tipo) {
     private void menu_movimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_movimentacaoActionPerformed
         if (Tipo.equals("A")) {
             Janela(mov);
+            mov.AtualizaMovimento();
         } else {
             JOptionPane.showMessageDialog(null, "Você não possui acesso a essa função", "Permissão negada!", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/br/compra/icones/exclamation.png"));
         }

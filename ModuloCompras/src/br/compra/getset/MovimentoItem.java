@@ -4,9 +4,18 @@ public class MovimentoItem {
 
     private Integer idMovimentoItem, quant;
     private Double preco;
+    private String Data;
 
     private ProdutoGetSet p;
     private FornecedorGetSet f;
+
+    public String getData() {
+        return Data;
+    }
+
+    public void setData(String Data) {
+        this.Data = Data;
+    }
 
     public Integer getIdMovimentoItem() {
         return idMovimentoItem;
