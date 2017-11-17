@@ -48,7 +48,11 @@ public class AddProdutoRequisicao extends javax.swing.JInternalFrame {
         String cod = (String) tabela_produtos.getValueAt(linha, 0);
         String prodt = (String) tabela_produtos.getValueAt(linha, 1);
 
-        String quantidade = JOptionPane.showInputDialog("Informe a quantidade");
+        String quantidade = "";
+        while(quantidade.length() <  1){
+        quantidade = JOptionPane.showInputDialog("Informe a quantidade");
+            
+        }
 
         model2.addRow(new Object[]{cod, prodt, quantidade});
     }

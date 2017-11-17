@@ -39,7 +39,7 @@ public class PedidoDao {
 
             ps.execute();
 
-            sql = "INSERT INTO pedido_compra_item (data_prevista, quantidade, preco, idPedido_compra, idProduto, idFornecedor) VALUES (?, ?, ?, ?, ?, ?);";
+            sql = "INSERT INTO pedido_compra_item (data_prevista, quantidade, preco, idPedido_compra, idProduto, idFornecedor,preco_unitario) VALUES (?,?, ?, ?, ?, ?, ?);";
 
             ps = conn.prepareStatement(sql);
             for (int i = 0; i < pedido.getpItem().size(); i++) {
@@ -57,14 +57,16 @@ public class PedidoDao {
                 ps.setInt(4, pedido.getIdPedidoCompra());
                 ps.setInt(5, Integer.valueOf(pedido.getpItem().get(i).getP().getCodigo()));
                 ps.setInt(6, Integer.valueOf(pedido.getpItem().get(i).getP().getF().get(0).getCodigo()));
+                ps.setDouble(7,  pedido.getpItem().get(i).getPrecoUnidade());
                 ps.execute();
 
             }
 
-            conn.commit();
+            //conn.commit();
         } catch (SQLException e) {
             // System.out.println("ERRO: " + e.getMessage());
 
+            System.out.println(e.getStackTrace());
             if (conn != null) {
                 try {
                     conn.rollback();
@@ -145,12 +147,12 @@ public class PedidoDao {
             ps = conn.prepareStatement(sql);
 
             List<PedidoItemGetSet> lispItem = new ArrayList<>();
-            List<FornecedorGetSet> lisForn = new ArrayList<>();
 
             for (int i = 0; i < lisP.size(); i++) {
                 ps.setInt(1, lisP.get(i).getIdPedidoCompra());
                 rs = ps.executeQuery();
                 while (rs.next()) {
+            List<FornecedorGetSet> lisForn = new ArrayList<>();
 
                     PedidoItemGetSet pItem = new PedidoItemGetSet();
 
@@ -224,9 +226,9 @@ public class PedidoDao {
 
            
 
-            conn.commit();
+            //conn.commit();
         } catch (SQLException e) {
-             System.out.println("ERRO: " + e.getMessage());
+             System.out.println("ERRO: " + e.getStackTrace());
 
             if (conn != null) {
                 try {
