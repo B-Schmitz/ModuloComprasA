@@ -90,6 +90,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         prod.setPreco_compra(Float.parseFloat(txt_precoCompra.getText()));
         prod.setPreco_un(Float.parseFloat(txt_precoUnitario.getText()));
         prod.setPreco_venda(Float.parseFloat(txt_precoVenda.getText()));
+        prod.setPreco_custo(Float.parseFloat(txt_precoCusto.getText()));
         prod.setSaldo(Integer.parseInt(txt_saldo.getText()));
 
         CategoriaGetSet cat = new CategoriaGetSet();
@@ -117,7 +118,6 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         for (int i = 0; i < lis.size(); i++) {
 
             combo_categoria.addItem(lis.get(i).getNome());
-
         }
 
     }
@@ -129,6 +129,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         txt_precoCompra.setText(null);
         txt_precoUnitario.setText(null);
         txt_precoVenda.setText(null);
+        txt_precoCusto.setText(null);
         txt_saldo.setText(null);
     }
 
@@ -139,6 +140,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                 || txt_precoCompra.getText().trim().isEmpty()
                 || txt_precoUnitario.getText().trim().isEmpty()
                 || txt_precoVenda.getText().trim().isEmpty()
+                || txt_precoCusto.getText().trim().isEmpty()
                 || txt_saldo.getText().trim().isEmpty());
     }
 
@@ -182,6 +184,8 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         txt_data = new javax.swing.JTextField();
         label_newdata = new javax.swing.JLabel();
         bnt_alterar_saldo = new javax.swing.JButton();
+        label_preco_custo = new javax.swing.JLabel();
+        txt_precoCusto = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Cadastrar Produto");
@@ -279,6 +283,8 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         bnt_alterar_saldo.setForeground(new java.awt.Color(51, 51, 55));
         bnt_alterar_saldo.setText("Alterar saldo");
 
+        label_preco_custo.setText("Preço Custo:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -304,7 +310,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                                         .addComponent(txt_precoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                                         .addComponent(label_est_min)
                                         .addGap(18, 18, 18))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -314,33 +320,6 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_estoqueMin, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                                     .addComponent(txt_saldo)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(label_preco_compra))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label_categoria)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt_precoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label_preco_venda)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_precoVenda))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(combo_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_novo))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bnt_alterar_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bnt_limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(label_codigo_produto)
@@ -352,7 +331,36 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                         .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label_newdata)
-                        .addGap(6, 6, 6)))
+                        .addGap(6, 6, 6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_categoria)
+                        .addGap(18, 18, 18)
+                        .addComponent(combo_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_novo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bnt_cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bnt_alterar_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bnt_limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(label_preco_compra))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(label_preco_custo)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_precoCusto)
+                            .addComponent(txt_precoCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(label_preco_venda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_precoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -401,7 +409,11 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(label_preco_venda)
                                 .addComponent(txt_precoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_preco_custo)
+                    .addComponent(txt_precoCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combo_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_categoria)
@@ -504,6 +516,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label_est_min;
     private javax.swing.JLabel label_newdata;
     private javax.swing.JLabel label_preco_compra;
+    private javax.swing.JLabel label_preco_custo;
     private javax.swing.JLabel label_preco_unitario;
     private javax.swing.JLabel label_preco_venda;
     private javax.swing.JLabel label_saldo;
@@ -514,6 +527,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_estoqueMin;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_precoCompra;
+    private javax.swing.JTextField txt_precoCusto;
     private javax.swing.JTextField txt_precoUnitario;
     private javax.swing.JTextField txt_precoVenda;
     private javax.swing.JTextField txt_saldo;

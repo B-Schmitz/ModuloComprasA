@@ -27,7 +27,7 @@ public class ProdutoDao {
         try {
 
             conn = Conexao.getConnection();
-            String sql = "INSERT INTO produto (idProduto,nome, `data`, estoque_max, estoque_min, saldo, preco_compra, preco_venda, preco_unitario,idCategoria) VALUES (?,?,?,?,?,?,?,?,?,?); ";
+            String sql = "INSERT INTO produto (idProduto,nome, `data`, estoque_max, estoque_min, saldo, preco_compra, preco_venda, preco_custo, preco_unitario,idCategoria) VALUES (?,?,?,?,?,?,?,?,?,?,?); ";
             ps = conn.prepareStatement(sql);
 
             ps.setInt(1, Integer.parseInt(prod.getCodigo()));
@@ -44,8 +44,9 @@ public class ProdutoDao {
             ps.setInt(6, prod.getSaldo());
             ps.setFloat(7, prod.getPreco_compra());
             ps.setFloat(8, prod.getPreco_venda());
-            ps.setFloat(9, prod.getPreco_un());
-            ps.setInt(10, prod.getCat().getCodigo());
+            ps.setFloat(9, prod.getPreco_custo());
+            ps.setFloat(10, prod.getPreco_un());
+            ps.setInt(11, prod.getCat().getCodigo());
             ps.execute();
 
             // conn.commit();
@@ -144,7 +145,7 @@ public class ProdutoDao {
 
         try {
             conn = Conexao.getConnection();
-            String sql = "select prod.idProduto,prod.data,prod.estoque_max,prod.estoque_min,prod.saldo,prod.preco_compra,prod.preco_venda,prod.preco_unitario,prod.idcategoria,prod.nome,cat.nome from produto prod, categoria cat where cat.idcategoria = prod.idcategoria;";
+            String sql = "select prod.idProduto,prod.data,prod.estoque_max,prod.estoque_min,prod.saldo,prod.preco_compra,prod.preco_venda,prod.preco_custo,prod.preco_unitario,prod.idcategoria,prod.nome,cat.nome from produto prod, categoria cat where cat.idcategoria = prod.idcategoria;";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -160,6 +161,7 @@ public class ProdutoDao {
                 prod.setSaldo(rs.getInt("prod.saldo"));
                 prod.setPreco_compra(rs.getFloat("prod.preco_compra"));
                 prod.setPreco_venda(rs.getFloat("prod.preco_venda"));
+                prod.setPreco_custo(rs.getFloat("prod.preco_custo"));
                 prod.setPreco_un(rs.getFloat("prod.preco_unitario"));
                 cat.setCodigo(rs.getInt("prod.idcategoria"));
                 prod.setNome(rs.getString("prod.nome"));

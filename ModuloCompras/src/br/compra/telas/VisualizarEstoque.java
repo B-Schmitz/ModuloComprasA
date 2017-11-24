@@ -29,7 +29,7 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
         for (int i = 0; i < lisP.size(); i++) {
 
             modelp.addRow(new Object[]{lisP.get(i).getCodigo(), lisP.get(i).getNome(), lisP.get(i).getEst_max(), lisP.get(i).getEst_min(),
-                lisP.get(i).getSaldo(), lisP.get(i).getPreco_un(), lisP.get(i).getPreco_compra(), lisP.get(i).getPreco_venda(), lisP.get(i).getData(), lisP.get(i).getCat().getNome()});
+                lisP.get(i).getSaldo(), lisP.get(i).getPreco_un(), lisP.get(i).getPreco_compra(), lisP.get(i).getPreco_venda(),lisP.get(i).getPreco_custo(), lisP.get(i).getData(), lisP.get(i).getCat().getNome()});
 
         }
     }
@@ -51,11 +51,11 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Produto", "Estoque máx", "Estoque mín", "Saldo", "Preço unitário", "Preço compra", "Preço venda", "Data", "Categoria"
+                "Código", "Produto", "Estoque máx", "Estoque mín", "Saldo", "Preço unitário", "Preço compra", "Preço venda", "Preço custo", "Data", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -81,6 +81,7 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
             tabela_produtos.getColumnModel().getColumn(7).setResizable(false);
             tabela_produtos.getColumnModel().getColumn(8).setResizable(false);
             tabela_produtos.getColumnModel().getColumn(9).setResizable(false);
+            tabela_produtos.getColumnModel().getColumn(10).setResizable(false);
         }
 
         tabela_fornecedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -106,17 +107,17 @@ public class VisualizarEstoque extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         pack();

@@ -6,7 +6,7 @@ public class ProdutoGetSet {
 
     private String codigo, nome, data, quant;
     private int saldo, est_max, est_min;
-    private float preco_un, preco_compra, preco_venda;
+    private float preco_un, preco_compra, preco_venda, preco_custo;
     private CategoriaGetSet cat;
 
 
@@ -106,5 +106,14 @@ public class ProdutoGetSet {
     public void setPreco_venda(float preco_venda) {
         this.preco_venda = preco_venda;
     }
+    
+     public float getPreco_custo() {
+        return preco_custo;
+    }
+
+    public void setPreco_custo(float preco_custo) {
+        this.preco_custo = preco_custo;
+    }
+    
 
 }
